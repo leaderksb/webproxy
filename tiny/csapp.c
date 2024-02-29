@@ -836,8 +836,12 @@ static ssize_t rio_read(rio_t *rp, char *usrbuf, size_t n)
 /* $begin rio_readinitb */
 void rio_readinitb(rio_t *rp, int fd) 
 {
-    rp->rio_fd = fd;  
-    rp->rio_cnt = 0;  
+    // 파일 또는 소켓 디스크립터 fd를 저장
+    rp->rio_fd = fd;
+    // rio_t 변수의 rio_cnt 필드를 0으로 초기화
+    rp->rio_cnt = 0;
+    // rio_bufptr 필드를 rio_buf 필드로 초기화
+    // 입출력 버퍼를 처음(배열의 이름은 배열의 첫번째 원소)부터 사용
     rp->rio_bufptr = rp->rio_buf;
 }
 /* $end rio_readinitb */
@@ -1065,7 +1069,3 @@ int Open_listenfd(char *port)
 }
 
 /* $end csapp.c */
-
-
-
-
